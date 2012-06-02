@@ -1,4 +1,4 @@
-stories
+Stories
 =======
 
 A site for collecting stories.
