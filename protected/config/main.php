@@ -16,6 +16,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.extensions.yii-mail.*',
 	),
 
 	'modules'=>array(
@@ -62,8 +63,22 @@ return array(
 		*/
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
-            'errorAction'=>'site/error',
-        ),
+			'errorAction'=>'site/error',
+		),
+		'mail' => array(
+			'class' => 'application.extensions.yii-mail.YiiMail',
+			'transportType' => 'smtp', /// case sensitive!
+			'transportOptions'=>array(
+				'host'=>'smtp.mydomain.com',
+				'username'=>'me@mydomain.com',
+				'password'=>'secretstuff',
+				// 'port'=>'465',
+				// 'encryption'=>'ssl',
+			),
+			'viewPath' => 'application.views.mail',
+			'logging' => true,
+			'dryRun' => false
+		),
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
@@ -86,5 +101,8 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+		// This is where emails sent from the site appear to come from
+		'senderEmail'=>'noreply@example.com',
+		'senderName'=>'No-Reply',
 	),
 );
