@@ -7,6 +7,8 @@
  */
 class UserIdentity extends CUserIdentity
 {
+	private $_id;
+
 	/**
 	 * Reasons a login can fail....
 	 */
@@ -133,6 +135,8 @@ class UserIdentity extends CUserIdentity
 			$user->locked_until = NULL;
 			$user->activkey = NULL;
 			$user->lastlogin_time = new CDbExpression('NOW()');
+
+			$this->_id=$user->id;
 			$this->errorCode = self::ERROR_NONE;
 		}
 
@@ -140,4 +144,11 @@ class UserIdentity extends CUserIdentity
 		return !$this->errorCode;
 	}
 
+	/**
+     * @return integer the ID of the user record
+     */
+    public function getId()
+    {
+		return $this->_id;
+    }
 }

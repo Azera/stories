@@ -5,7 +5,7 @@
  * PasswordForm is the data structure for keeping
  * user change password form data. It is used by the 'changepass' action of 'AccountController'.
  */
-class PassowrdForm extends CFormModel
+class PasswordForm extends CFormModel
 {
 	public $oldpass;
 	public $newpass1;
@@ -50,6 +50,7 @@ class PassowrdForm extends CFormModel
 	{
 		if(!$this->hasErrors())
 		{
+			$userid = Yii::app()->user->id;
             $user = User::model()->findByPk(Yii::app()->user->id);
             $encPass = User::encrypt($user->salt . $this->oldpass);
             if($user->password != $encPass)
