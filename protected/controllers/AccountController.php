@@ -76,17 +76,19 @@ class AccountController extends Controller
 					'key' => $model->unsaltedkey
 				));
 
-				// TODO: Get email from template, and use PHPmailer or something
-				$adminEmail = Yii::app()->params['adminEmail'];
-				$headers = "MIME-Version: 1.0\r\nFrom: $adminEmail\r\nReply-To: $adminEmail\r\nContent-Type: text/html; charset=utf-8";
-				$subject = 'Account activation for ' . Yii::app()->name;
-				$message = "Please activate your account by clicking on the following link:\r\n$act_url";
+				$message = new YiiMailMessage();
+				$message->setTo(array($model->email => $model->username));
+				$message->setFrom(array(Yii::app()->params['senderEmail'] => Yii::app()->params['sendeerName']));
+				$message->setSubject('Account activation for ' . Yii::app()->name);
+				$message->view = 'activate';
+				$message->setBody(array('link' => $act_url), 'text/html');
+				$numsent = Yii::app()->mail->send($message);
+			
+				if($numsent > 0)
+					Yii::app()->user->setFlash('success', 'Thank you for your registration. Please check your email for instructions to activate your account.');
+				else
+					Yii::app()->user->setFlash('error', 'Something went wrong sending your activation email.');
 
-				mail(
-					$model->email, '=?UTF-8?B?' . base64_encode($subject) . '?=', str_replace("\n.", "\n..", wordwrap($message, 70)), $headers
-				);
-
-				Yii::app()->user->setFlash('success', 'Thank you for your registration. Please check your email for instructions to activate your account.');
 				$this->redirect(array('/site/index'));
 			}
 		}
