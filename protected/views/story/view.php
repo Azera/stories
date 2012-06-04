@@ -55,9 +55,9 @@ Rating gadget, fixed if user already rated this story<br/>
 )); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($comment,'content'); ?>
-		<?php echo $form->textArea($comment,'content',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($comment,'content'); ?>
+		<?php echo $form->labelEx($newcomment,'content'); ?>
+		<?php echo $form->textArea($newcomment,'content',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($newcomment,'content'); ?>
 	</div>
 
 	<div class="row buttons">

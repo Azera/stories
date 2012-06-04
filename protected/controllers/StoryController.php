@@ -59,18 +59,18 @@ class StoryController extends Controller
 		Yii::app()->db->createCommand($sql)->execute(array(':id'=>$model->id));
 
 
-		$comment=new Comment();
+		$newcomment=new Comment();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Comment']))
 		{
-			$comment->attributes=$_POST['Comment'];
-			$comment->story_id = $id;
-			if($comment->save())
+			$newcomment->attributes=$_POST['Comment'];
+			$newcomment->story_id = $id;
+			if($newcomment->save())
 			{
-				if(!$comment->is_published)
+				if(!$newcomment->is_published)
 					Yii::app()->user->setFlash('commentSubmitted','Thank you for your comment. Your comment will be posted once it is approved.');
 				$this->refresh();
 			}
@@ -79,7 +79,7 @@ class StoryController extends Controller
 
 		$this->render('view', array(
 			'model'=>$model,
-			'comment'=>$comment,
+			'newcomment'=>$newcomment,
 		));
 	}
 
