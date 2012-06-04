@@ -52,7 +52,6 @@ Rating gadget, fixed if user already rated this story<br/>
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'comment-form',
 	'enableAjaxValidation'=>true,
-	// 'action'=>Yii::app()->createUrl('story/newcomment', array('id'=>$model->id)),
 )); ?>
 
 	<div class="row">
