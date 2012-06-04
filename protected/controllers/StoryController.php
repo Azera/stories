@@ -34,7 +34,7 @@ class StoryController extends Controller
 			// Actions allowed for authenticated users
 			// Additional checks are in place in actions (i.e. points system)
 			array('allow',
-				'actions'=>array('create', 'rate', 'report'),
+				'actions'=>array('create', 'newcomment', 'rate', 'report'),
 				'users'=>array('@'),
 			),
 			// deny all users
@@ -58,7 +58,25 @@ class StoryController extends Controller
 		$sql = 'UPDATE '. $model->tableName() .' SET read_count=read_count+1 WHERE id=:id';
 		Yii::app()->db->createCommand($sql)->execute(array(':id'=>$model->id));
 
-		$this->render('view', array('model'=>$model));
+
+		$comment=new Comment;
+
+		// Uncomment the following line if AJAX validation is needed
+		$this->performAjaxValidation($model);
+
+		if(isset($_POST['Comment']))
+		{
+			$comment->attributes=$_POST['Comment'];
+			$comment->story_id = $id;
+			if($comment->save())
+				$this->redirect(array('view', 'id'=>$id));
+		}
+
+
+		$this->render('view', array(
+			'model'=>$model,
+			'comment'=>$comment,
+		));
 	}
 
 	/**

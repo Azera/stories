@@ -39,4 +39,33 @@ Rating gadget, fixed if user already rated this story<br/>
 		</div>
 	<?php endforeach; ?>
 <?php endif; ?>
-<h3>Add a comment:</h3>
+
+<h3>Leave a comment</h3>
+<?php if(Yii::app()->user->isGuest): ?>
+	<p>Please log in to leave a comment.</p>
+<?php elseif(Yii::app()->user->hasFlash('commentSubmitted')): ?>
+	<div class="flash-success">
+		<?php echo Yii::app()->user->getFlash('commentSubmitted'); ?>
+	</div>
+<?php else: ?>
+<div class="form">
+<?php $form=$this->beginWidget('CActiveForm', array(
+	'id'=>'comment-form',
+	'enableAjaxValidation'=>true,
+	// 'action'=>Yii::app()->createUrl('story/newcomment', array('id'=>$model->id)),
+)); ?>
+
+	<div class="row">
+		<?php echo $form->labelEx($comment,'content'); ?>
+		<?php echo $form->textArea($comment,'content',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($comment,'content'); ?>
+	</div>
+
+	<div class="row buttons">
+		<?php echo CHtml::submitButton('Submit'); ?>
+	</div>
+
+<?php $this->endWidget(); ?>
+</div><!-- form -->
+
+<?php endif; ?>

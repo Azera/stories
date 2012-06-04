@@ -170,7 +170,7 @@ class Story extends AuditActiveRecord
 		{
 			// Set author
 			$this->author_id = Yii::app()->user->id;
-			$this->is_published = 0; // Depends on user acess level
+			$this->is_published = 0; // TODO: Depends on user points or admin
 		}
 		return parent::beforeValidate();
 	}
