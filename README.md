@@ -17,3 +17,5 @@ Edit ./protected/config/main.php, section 'db' to connect to this database
 Make sure the following directories are writable by your webserver user:
     ./protected/runtime
     ./public/assets
+Login with username=admin, password=admin
+
