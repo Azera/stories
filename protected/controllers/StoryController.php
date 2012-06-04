@@ -64,11 +64,10 @@ class StoryController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Comment']))
+		if(isset($_POST['Comment']) && isset($_POST['Comment']['content']))
 		{
 			$newcomment->attributes=$_POST['Comment'];
-			$newcomment->story_id = $id;
-			if($newcomment->save())
+			if($model->addComment($newcomment))
 			{
 				if(!$newcomment->is_published)
 					Yii::app()->user->setFlash('commentSubmitted','Thank you for your comment. Your comment will be posted once it is approved.');

@@ -202,4 +202,20 @@ class Story extends AuditActiveRecord
 			(5 * $this->rating_count_5)) / ($totalvotes);
 	}
 
+	/**
+	 * Adds a new comment to this story.
+	 * This method will set story_id to this story, authoer_id to current
+	 * user's id, and is_published according to the current user's points
+	 * or is_admin status
+	 * @param Comment comment to be added
+	 * @return boolean whether the comment is saved successfully
+	 */
+	public function addComment(Comment $comment)
+	{
+		$comment->story_id = $this->id;
+		$comment->author_id = Yii::app()->user->id;
+		$comment->is_published = 0; // TODO: Depends on user points or is_admin
+		return $comment->save();
+	}
+
 }
