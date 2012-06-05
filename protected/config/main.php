@@ -9,10 +9,8 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My Web Application',
 
-	// preloading 'log' component
 	'preload'=>array('log'),
 
-	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
@@ -20,25 +18,17 @@ return array(
 	),
 
 	'modules'=>array(
-		// uncomment the following to enable the Gii tool
-		/*
-		'gii'=>array(
+		// Gii enabled in non-production mode only
+		'gii'=>defined('ENV_PROD')?NULL:array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'Enter Your Password Here',
-		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
+			'password'=>false,
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
-		*/
 	),
-
-	// application components
 	'components'=>array(
 		'user'=>array(
-			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
-		// uncomment the following to enable URLs in path-format
-		/*
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
@@ -47,38 +37,22 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		*/
-		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),
-		// uncomment the following to use a MySQL database
-		/*
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
-			'charset' => 'utf8',
-		),
-		*/
+		'db'=>array_merge(require(dirname(__FILE__).'/db.php'), array(
+			'charset'=>'utf8',
+			'schemaCachingDuration'=>defined('ENV_PROD')?60*60:0,
+		)),
 		'errorHandler'=>array(
-			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
 		),
-		'mail' => array(
+		'request'=>array(
+			'enableCsrfValidation'=>true,
+		),
+		'mail'=>array_merge(require(dirname(__FILE__).'/mail.php'), array(
 			'class' => 'application.extensions.yii-mail.YiiMail',
-			'transportType' => 'smtp', /// case sensitive!
-			'transportOptions'=>array(
-				'host'=>'smtp.mydomain.com',
-				'username'=>'me@mydomain.com',
-				'password'=>'secretstuff',
-				// 'port'=>'465',
-				// 'encryption'=>'ssl',
-			),
 			'viewPath' => 'application.views.mail',
 			'logging' => true,
 			'dryRun' => false
-		),
+		)),
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
@@ -86,23 +60,8 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error, warning',
 				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
 			),
 		),
 	),
-
-	// application-level parameters that can be accessed
-	// using Yii::app()->params['paramName']
-	'params'=>array(
-		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
-		// This is where emails sent from the site appear to come from
-		'senderEmail'=>'noreply@example.com',
-		'senderName'=>'No-Reply',
-	),
+	'params'=>require(dirname(__FILE__).'/params.php'),
 );
