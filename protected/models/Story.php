@@ -218,4 +218,13 @@ class Story extends AuditActiveRecord
 		return $comment->save();
 	}
 
+	/**
+	 * Determines if a story can be reported. i.e. is not reported already,
+	 * and has not been reviewed.
+	 * @return bool Wether or not the story can be reported
+	 */
+	public function getCanBeReported()
+	{
+		return (NULL == $this->reported_user) and (NULL == $this->reviewed_user);
+	}
 }
