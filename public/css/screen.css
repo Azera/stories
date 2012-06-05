@@ -238,3 +238,33 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .clearfix:after, .container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 .clearfix, .container {display:block;}
 .clear {clear:both;}
+
+/* Comments below story */
+.commentlist {margin-bottom:20px;}
+.commentlist .comment {
+	border-top:1px solid #ddd;
+	margin-top:20px;
+}
+.commentlist .comment .comment-header {
+	padding:10px;
+}
+.commentlist .comment .comment-header .comment-image {
+	width:32px;
+	height:32px;
+	float:left;
+	margin-right:10px;
+}
+.commentlist .comment .comment-header .comment-links {
+	float:right;
+}
+.commentlist .comment .comment-header .comment-author {
+	font-size:16px;
+	font-weight:bold;
+}
+.commentlist .comment .comment-header .comment-date {
+
+}
+.commentlist .comment .comment-text {
+	padding:10px;
+	background-color:#b7d6e7;
+}
