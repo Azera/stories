@@ -238,17 +238,3 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .clearfix:after, .container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 .clearfix, .container {display:block;}
 .clear {clear:both;}
-
-/*
-	Application specific
-*/
-
-/* List of comments below story */
-.commentlist {}
-.commentlist .comment {margin-bottom:20px; padding:0; border-top:1px solid #e3e3e3;}
-.commentlist .comment .comment-header {margin:10px;}
-.commentlist .comment .comment-header .comment-image {height:32px; width:32px; float:left; margin-right:10px;}
-.commentlist .comment .comment-header .comment-author {font-size:16px; font-weight:bold;}
-.commentlist .comment .comment-header .comment-date {}
-.commentlist .comment .comment-header .comment-links {float:right;}
-.commentlist .comment .comment-text {clear:both; padding:10px; background-color:#d9e3ed;}

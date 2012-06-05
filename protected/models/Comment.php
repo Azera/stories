@@ -145,13 +145,4 @@ class Comment extends AuditActiveRecord
 		return parent::beforeValidate();
 	}
 
-	/**
-	 * Determines if a comment can be reported. i.e. is not reported already,
-	 * and has not been reviewed.
-	 * @return bool Wether or not the comment can be reported
-	 */
-	public function getCanBeReported()
-	{
-		return (NULL == $this->reported_user) and (NULL == $this->reviewed_user);
-	}
 }
