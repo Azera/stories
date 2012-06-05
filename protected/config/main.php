@@ -37,22 +37,22 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		'db'=>array_merge(require(dirname(__FILE__).'/db.php'), array(
+		'db'=>CMap::mergeArray(array(
 			'charset'=>'utf8',
 			'schemaCachingDuration'=>defined('ENV_PROD')?60*60:0,
-		)),
+		), require(dirname(__FILE__).'/db.php')),
 		'errorHandler'=>array(
 			'errorAction'=>'site/error',
 		),
 		'request'=>array(
 			'enableCsrfValidation'=>true,
 		),
-		'mail'=>array_merge(require(dirname(__FILE__).'/mail.php'), array(
+		'mail'=>CMap::mergeArray(array(
 			'class' => 'application.extensions.yii-mail.YiiMail',
 			'viewPath' => 'application.views.mail',
 			'logging' => true,
 			'dryRun' => false
-		)),
+		), require(dirname(__FILE__).'/mail.php')),
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
